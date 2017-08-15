@@ -1,8 +1,10 @@
-namespace Newbe.Mahua.Commands
+﻿namespace Newbe.Mahua.Commands
 {
     public interface ICommandCenter
     {
-        void Handle(MahuaCommand command);
-        void Handle(MahuaCommand command, out MahuaCommandResult mahuaCommandResult);
+        TResult HandleWithResult<TCommand, TResult>(TCommand command)
+            where TCommand : MahuaCommand<TResult> where TResult : MahuaCommandResult;
+
+        void Handle<TCommand>(TCommand command) where TCommand : MahuaCommand;
     }
 }
